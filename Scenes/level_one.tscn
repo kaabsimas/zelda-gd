@@ -1,7 +1,8 @@
-[gd_scene load_steps=58 format=3 uid="uid://dtevk2wh507k2"]
+[gd_scene load_steps=59 format=3 uid="uid://dtevk2wh507k2"]
 
 [ext_resource type="Texture2D" uid="uid://dcgk85vcs50ww" path="res://Assets/Sprites/Player-rpg.png" id="1_2n5gj"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_dv86b"]
+[ext_resource type="PackedScene" uid="uid://c0vlc3gs7l3a8" path="res://Scenes/crate.tscn" id="3_c0g4r"]
 
 [sub_resource type="Animation" id="Animation_g5eim"]
 resource_name = "Dead"
@@ -695,8 +696,10 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-250, -59.2445)
 
 [node name="level_one" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("1_dv86b")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
@@ -718,9 +721,10 @@ shape = SubResource("RectangleShape2D_ha3w0")
 [node name="Sword" type="Area2D" parent="Player"]
 position = Vector2(21, -1)
 scale = Vector2(1.17714, -2.30389)
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Sword"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_snwyg")
 debug_color = Color(0.898039, 0.231373, 0.203922, 0.419608)
 
@@ -737,3 +741,6 @@ parameters/Walk/5/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="crate" parent="." instance=ExtResource("3_c0g4r")]
+position = Vector2(98, -21)
