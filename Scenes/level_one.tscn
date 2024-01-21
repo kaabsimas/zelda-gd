@@ -1,17 +1,16 @@
-[gd_scene load_steps=65 format=3 uid="uid://dtevk2wh507k2"]
+[gd_scene load_steps=71 format=3 uid="uid://dtevk2wh507k2"]
 
 [ext_resource type="Texture2D" uid="uid://dcgk85vcs50ww" path="res://Assets/Sprites/Player-rpg.png" id="1_2n5gj"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_dv86b"]
-[ext_resource type="PackedScene" uid="uid://c0vlc3gs7l3a8" path="res://Scenes/crate.tscn" id="3_c0g4r"]
+[ext_resource type="PackedScene" path="res://Scenes/crate.tscn" id="3_c0g4r"]
 [ext_resource type="Script" path="res://Scenes/GUI/camera.gd" id="3_ilely"]
 [ext_resource type="Texture2D" uid="uid://dn4ukt1hb1kvd" path="res://Assets/Tilesets/spritesheet.png" id="4_31eyj"]
 [ext_resource type="Script" path="res://Scenes/GUI/camera_panning.gd" id="6_an7k3"]
-[ext_resource type="PackedScene" uid="uid://c61j5f48a3wdv" path="res://Scenes/coin.tscn" id="7_74u6l"]
+[ext_resource type="PackedScene" uid="uid://b0t0f12yagl4q" path="res://Scenes/coin.tscn" id="7_74u6l"]
 
 [sub_resource type="Animation" id="Animation_g5eim"]
 resource_name = "Dead"
 length = 0.45
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -23,6 +22,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [100, 101, 102, 103, 104]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.44),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_states_reset"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_01a15"]
@@ -687,6 +700,34 @@ size = Vector2(13, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_snwyg"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hmaqi"]
+animation = &"Dead"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e3ut5"]
+animation = &"Dead"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2nryi"]
+animation = &"Dead"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_srlh8"]
+animation = &"Dead"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_idviw"]
+animation = &"Dead"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_f2hpq"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_hmaqi")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_e3ut5")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_2nryi")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_srlh8")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_idviw")
+blend_point_4/pos = Vector2(0, -1)
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yd0iy"]
 animation = &"IdleLeft"
 
@@ -811,6 +852,8 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_huosn"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_230p6"]
+states/Dead/node = SubResource("AnimationNodeBlendSpace2D_f2hpq")
+states/Dead/position = Vector2(654, 100)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_uok15")
 states/Idle/position = Vector2(260, 100)
 states/Jump/node = SubResource("AnimationNodeBlendSpace2D_tosyw")
@@ -1051,6 +1094,7 @@ debug_color = Color(0.898039, 0.231373, 0.203922, 0.419608)
 tree_root = SubResource("AnimationNodeStateMachine_230p6")
 anim_player = NodePath("../AnimationPlayer")
 active = true
+parameters/Dead/blend_position = Vector2(0, 0)
 parameters/Idle/blend_position = Vector2(-0.00847459, 0.729258)
 parameters/Jump/blend_position = Vector2(0.00169492, 0.484144)
 parameters/Sword/blend_position = Vector2(-0.00677967, 0.0480349)
@@ -1072,7 +1116,7 @@ position = Vector2(98, -21)
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
-position = Vector2(192, 112)
+position = Vector2(193, 111)
 tile_set = SubResource("TileSet_rrjxk")
 format = 2
 layer_0/name = "Ground"
@@ -1091,7 +1135,7 @@ position = Vector2(-70, -62)
 [node name="crate3" parent="." instance=ExtResource("3_c0g4r")]
 position = Vector2(-85, 57)
 
-[node name="Camera2D2" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+[node name="Camera2D3" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 anchor_mode = 0
 zoom = Vector2(3, 3)
 script = ExtResource("6_an7k3")
@@ -1099,3 +1143,12 @@ player = NodePath("../Player")
 
 [node name="Coin" parent="." instance=ExtResource("7_74u6l")]
 position = Vector2(256, 144)
+
+[node name="Coin2" parent="." instance=ExtResource("7_74u6l")]
+position = Vector2(96, 177)
+
+[node name="Coin3" parent="." instance=ExtResource("7_74u6l")]
+position = Vector2(173, 55)
+
+[node name="Coin4" parent="." instance=ExtResource("7_74u6l")]
+position = Vector2(187.192, 169.353)
