@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dx73vlb55pgam" path="res://Assets/Sprites/Crate-animated.png" id="2_x1aem"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58i3y"]
-size = Vector2(16, 7)
+size = Vector2(16, 9.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_npshf"]
 radius = 12.0
@@ -140,20 +140,25 @@ script = ExtResource("1_sjnjb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
+position = Vector2(0, 3)
 texture = ExtResource("2_x1aem")
+offset = Vector2(0, -3)
 hframes = 11
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4.5)
+y_sort_enabled = true
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_58i3y")
 disabled = true
 
 [node name="Hitbox" type="Area2D" parent="."]
+z_as_relative = false
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+z_as_relative = false
 shape = SubResource("CircleShape2D_npshf")
 disabled = true
 debug_color = Color(0.87451, 0.266667, 0.560784, 0.419608)

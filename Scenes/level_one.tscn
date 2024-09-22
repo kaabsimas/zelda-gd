@@ -1,12 +1,13 @@
-[gd_scene load_steps=71 format=3 uid="uid://dtevk2wh507k2"]
+[gd_scene load_steps=72 format=3 uid="uid://dtevk2wh507k2"]
 
 [ext_resource type="Texture2D" uid="uid://dcgk85vcs50ww" path="res://Assets/Sprites/Player-rpg.png" id="1_2n5gj"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_dv86b"]
-[ext_resource type="PackedScene" path="res://Scenes/crate.tscn" id="3_c0g4r"]
+[ext_resource type="PackedScene" uid="uid://c0vlc3gs7l3a8" path="res://Scenes/crate.tscn" id="3_c0g4r"]
 [ext_resource type="Script" path="res://Scenes/GUI/camera.gd" id="3_ilely"]
 [ext_resource type="Texture2D" uid="uid://dn4ukt1hb1kvd" path="res://Assets/Tilesets/spritesheet.png" id="4_31eyj"]
 [ext_resource type="Script" path="res://Scenes/GUI/camera_panning.gd" id="6_an7k3"]
-[ext_resource type="PackedScene" uid="uid://b0t0f12yagl4q" path="res://Scenes/coin.tscn" id="7_74u6l"]
+[ext_resource type="PackedScene" uid="uid://c61j5f48a3wdv" path="res://Scenes/coin.tscn" id="7_74u6l"]
+[ext_resource type="PackedScene" uid="uid://cfo4vdjltx6s7" path="res://Scenes/enemy.tscn" id="8_3761b"]
 
 [sub_resource type="Animation" id="Animation_g5eim"]
 resource_name = "Dead"
@@ -696,7 +697,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ha3w0"]
-size = Vector2(13, 6)
+size = Vector2(12, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_snwyg"]
 
@@ -1065,7 +1066,9 @@ position = Vector2(64, 48)
 script = ExtResource("1_dv86b")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(0, 11)
 texture = ExtResource("1_2n5gj")
+offset = Vector2(0, -11)
 hframes = 12
 vframes = 9
 frame = 1
@@ -1077,7 +1080,8 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-0.5, 13)
+y_sort_enabled = true
+position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_ha3w0")
 
 [node name="Sword" type="Area2D" parent="Player"]
@@ -1152,3 +1156,6 @@ position = Vector2(173, 55)
 
 [node name="Coin4" parent="." instance=ExtResource("7_74u6l")]
 position = Vector2(187.192, 169.353)
+
+[node name="Enemy" parent="." instance=ExtResource("8_3761b")]
+position = Vector2(136, 128)
